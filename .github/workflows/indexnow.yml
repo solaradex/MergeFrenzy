@@ -1,0 +1,32 @@
+name: Submit MergeFrenzy URLs to IndexNow
+on:
+  workflow_run:
+    workflows: ["pages build and deployment"]
+    types: [completed]
+  workflow_dispatch:
+jobs:
+  indexnow:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Submit live URLs to IndexNow
+        shell: bash
+        run: |
+          set -euo pipefail
+          HOST="solaradex.github.io"
+          KEY_FILE="b8890c61bb1adefecbc986ac4f8d2adb.txt"
+          KEY="$(tr -d '\r\n' < "$KEY_FILE")"
+          KEY_LOCATION="https://solaradex.github.io/MergeFrenzy/$KEY_FILE"
+          curl --fail-with-body --retry 5 --retry-delay 10 -X POST "https://api.indexnow.org/indexnow"             -H "Content-Type: application/json; charset=utf-8"             --data @- <<JSON
+          {
+            "host": "$HOST",
+            "key": "$KEY",
+            "keyLocation": "$KEY_LOCATION",
+            "urlList": [
+              "https://solaradex.github.io/MergeFrenzy/",
+              "https://solaradex.github.io/MergeFrenzy/privacy.html",
+              "https://solaradex.github.io/MergeFrenzy/terms.html"
+            ]
+          }
+          JSON
