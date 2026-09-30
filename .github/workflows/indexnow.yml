@@ -1,7 +1,7 @@
 name: Submit MergeFrenzy URLs to IndexNow
 on:
   workflow_run:
-    workflows: ["pages build and deployment"]
+    workflows: ["Deploy MergeFrenzy to GitHub Pages"]
     types: [completed]
   workflow_dispatch:
 jobs:
