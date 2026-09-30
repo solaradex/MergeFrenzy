@@ -15,3 +15,6 @@ No backend, database, paid API, or build system is required.
 
 ## Monetization
 See `MONETIZATION.md`. The repository does not include fake advertisements or invented sponsored brands.
+
+## Search discovery
+IndexNow is submitted automatically after successful GitHub Pages deployments.
