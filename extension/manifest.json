@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "MergeFrenzy New Tab",
+  "version": "1.0.0",
+  "description": "Play a free 2048-style puzzle game every time you open a new tab.",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "icons": {
+    "192": "icons/icon-192.svg",
+    "512": "icons/icon-512.svg"
+  }
+}
